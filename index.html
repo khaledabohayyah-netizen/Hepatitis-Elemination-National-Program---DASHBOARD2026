@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة مؤشرات برنامج مكافحة الالتهاب الكبدي (ج) — 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{--bg:#06090f;--bg2:#0c1220;--card:#111a2e;--card2:#152038;--em:#00e5a0;--emd:rgba(0,229,160,.12);--bl:#3b82f6;--bld:rgba(59,130,246,.12);--am:#f59e0b;--amd:rgba(245,158,11,.12);--rd:#ef4444;--rdd:rgba(239,68,68,.12);--pr:#a78bfa;--prd:rgba(167,139,250,.12);--cy:#22d3ee;--cyd:rgba(34,211,238,.12);--pk:#f472b6;--pkd:rgba(244,114,182,.12);--lm:#a3e635;--gn:#10b981;--gnd:rgba(16,185,129,.12);--t1:#f0f4f8;--t2:#8b9dc3;--t3:#4a5f82;--bdr:rgba(255,255,255,.05);--r:18px;--rs:12px;--rx:8px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.o1{width:600px;height:600px;top:-200px;right:-100px;background:rgba(0,229,160,.04)}
+.o2{width:500px;height:500px;bottom:-150px;left:-100px;background:rgba(59,130,246,.04)}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+.w{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:0 24px 60px}
+.hdr{padding:28px 0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:1px solid var(--bdr);margin-bottom:28px}
+.hdr-r{display:flex;align-items:center;gap:16px}
+.logo{width:52px;height:52px;background:linear-gradient(135deg,var(--em),var(--bl));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 24px rgba(0,229,160,.2)}
+.hdr-t h1{font-family:'Cairo',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--em),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-t p{font-size:13px;color:var(--t2);margin-top:2px}
+.hdr-l{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bdg{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px}
+.bdg-live{background:var(--emd);color:var(--em);border:1px solid rgba(0,229,160,.2)}
+.bdg-live::before{content:'';width:7px;height:7px;background:var(--em);border-radius:50%;animation:pls 2s infinite}
+@keyframes pls{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,229,160,.5)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(0,229,160,0)}}
+.bdg-yr{background:var(--bld);color:var(--bl);border:1px solid rgba(59,130,246,.2)}
+.bdg-ref{background:rgba(245,158,11,.12);color:var(--am);border:1px solid rgba(245,158,11,.2);cursor:pointer;transition:all .3s}
+.bdg-ref:hover{background:rgba(245,158,11,.25)}
+.upd{font-size:11px;color:var(--t3)}
+#lastUpdate{color:var(--am);font-weight:600}
+.loader{display:flex;align-items:center;justify-content:center;padding:120px 0;flex-direction:column;gap:16px}
+.spinner{width:48px;height:48px;border:4px solid var(--bdr);border-top-color:var(--em);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader p{color:var(--t2);font-size:14px}
+.method-info{background:var(--card);border:1px solid rgba(0,229,160,.2);border-radius:var(--r);padding:14px 20px;margin-bottom:20px;font-size:12px;color:var(--t2);display:flex;align-items:center;gap:10px}
+.method-info .tag{padding:3px 10px;border-radius:12px;font-weight:700;font-size:11px}
+.tag-ok{background:var(--emd);color:var(--em)}
+.tag-fallback{background:var(--amd);color:var(--am)}
+.kpi-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:28px}
+.kc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:20px 18px;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.4,0,.2,1)}
+.kc:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.1)}
+.kc::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+.ki{width:40px;height:40px;border-radius:var(--rx);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+.kl{font-size:12px;color:var(--t2);margin-bottom:6px;font-weight:500}
+.kv{font-family:'Cairo',sans-serif;font-size:32px;font-weight:900;line-height:1;margin-bottom:4px}
+.ks{font-size:11px;color:var(--t3)}.kp{font-size:12px;font-weight:700;padding:2px 8px;border-radius:12px}
+.k1::before{background:linear-gradient(90deg,var(--em),var(--cy))}.k1 .ki{background:var(--emd);color:var(--em)}.k1 .kv{color:var(--em)}
+.k2::before{background:linear-gradient(90deg,var(--bl),var(--pr))}.k2 .ki{background:var(--bld);color:var(--bl)}.k2 .kv{color:var(--bl)}
+.k3::before{background:linear-gradient(90deg,var(--gn),var(--lm))}.k3 .ki{background:var(--gnd);color:var(--gn)}.k3 .kv{color:var(--gn)}
+.k4::before{background:linear-gradient(90deg,var(--am),#fb923c)}.k4 .ki{background:var(--amd);color:var(--am)}.k4 .kv{color:var(--am)}
+.k5::before{background:linear-gradient(90deg,var(--cy),var(--em))}.k5 .ki{background:var(--cyd);color:var(--cy)}.k5 .kv{color:var(--cy)}
+.k6::before{background:linear-gradient(90deg,var(--rd),var(--pk))}.k6 .ki{background:var(--rdd);color:var(--rd)}.k6 .kv{color:var(--rd)}
+.k7::before{background:linear-gradient(90deg,var(--pr),var(--pk))}.k7 .ki{background:var(--prd);color:var(--pr)}.k7 .kv{color:var(--pr)}
+.k8::before{background:linear-gradient(90deg,var(--pk),var(--am))}.k8 .ki{background:var(--pkd);color:var(--pk)}.k8 .kv{color:var(--pk)}
+.gg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:28px}
+.gc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:24px 20px;text-align:center}
+.gc h3{font-size:13px;color:var(--t2);margin-bottom:16px;font-weight:500}
+.gw{position:relative;width:130px;height:130px;margin:0 auto 12px}.gw canvas{width:130px;height:130px}
+.gval{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cairo',sans-serif;font-size:28px;font-weight:900}
+.gd{font-size:11px;color:var(--t3);line-height:1.5}
+.fn{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:28px;margin-bottom:28px}
+.fn-t{font-size:16px;font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.fn-s{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.fn-i{text-align:center;flex:1;min-width:120px}
+.fn-b{border-radius:var(--rx);display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:24px;font-weight:900;color:#fff;margin:0 4px;transition:transform .3s}
+.fn-b:hover{transform:scale(1.05)}
+.fn-l{font-size:11px;color:var(--t2);margin-top:10px;font-weight:500}
+.fn-a{font-size:20px;color:var(--t3);flex-shrink:0;margin:0 -4px}
+.fn-r{font-size:10px;font-weight:700;color:var(--em);margin-top:4px}
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:28px}
+@media(max-width:900px){.cg{grid-template-columns:1fr}}
+.cc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:24px}
+.cc.fw{grid-column:1/-1}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.ch h3{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.ccn{position:relative;width:100%}.ccn canvas{width:100%!important}
+.ts{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:24px;margin-bottom:28px;overflow-x:auto}
+.ts h3{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--card2);color:var(--t2);font-weight:600;padding:12px 14px;text-align:right;border-bottom:1px solid var(--bdr);white-space:nowrap}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--bdr)}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+.ft{text-align:center;padding:24px 0;border-top:1px solid var(--bdr);color:var(--t3);font-size:12px}
+.ft span{color:var(--em);font-weight:700}
+@keyframes fsu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fsu .5s ease forwards;opacity:0}
+@media(max-width:768px){.w{padding:0 12px 40px}.hdr-t h1{font-size:17px}.kpi-g{grid-template-columns:repeat(2,1fr);gap:10px}.kv{font-size:26px}.gg{grid-template-columns:repeat(2,1fr)}.fn-s{flex-direction:column}.fn-a{transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<div class="w">
+<header class="hdr">
+<div class="hdr-r"><div class="logo">🛡️</div><div class="hdr-t"><h1>برنامج مكافحة الالتهاب الكبدي الفيروسي (ج)</h1><p>التجمع الصحي الثاني بالرياض — لوحة المؤشرات الحية 2026</p></div></div>
+<div class="hdr-l">
+<span class="bdg bdg-live">مباشر</span>
+<span class="bdg bdg-yr">📅 2026</span>
+<span class="bdg bdg-ref" onclick="loadAllData()">🔄 تحديث</span>
+<span class="upd">آخر تحديث: <span id="lastUpdate">جاري التحميل...</span></span>
+</div>
+</header>
+<div id="methodInfo" class="method-info" style="display:none"></div>
+<div id="loading" class="loader"><div class="spinner"></div><p>جاري تحميل البيانات...</p></div>
+<div id="dashboard" style="display:none">
+<section class="kpi-g" id="kpiSection"></section>
+<section class="gg" id="gaugeSection"></section>
+<section class="fn" id="funnelSection"></section>
+<section class="cg" id="chartsSection"></section>
+<section class="ts" id="tableSection"></section>
+<footer class="ft">
+<p>لوحة مؤشرات أداء برنامج مكافحة الالتهاب الكبدي الفيروسي (ج) — <span>التجمع الصحي الثاني بالرياض</span> — 2026</p>
+<p style="margin-top:4px">🔄 البيانات تُحدّث تلقائياً كل 5 دقائق</p>
+</footer>
+</div>
+</div>
+
+<script>
+/*
+ * =============================================
+ *  إعدادات مصدر البيانات
+ * =============================================
+ *  الطريقة الأساسية: Google Apps Script API
+ *  غيّر الرابط التالي برابط النشر الخاص بك
+ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbyVzt23lyV1obLcbvW2RlBjT74Fw_FciZrJJ2dwQd79UIVvifA_ZgmiXLRc7s_SmU8Y/exec';
+
+/*
+ *  الطريقة الاحتياطية: CSV مباشر
+ */
+const SHEET_ID = '2PACX-1vSIY1lTu0-qWMciEDaQxmp-a5PQpRtlEbckrCUtcXt8w2na1QW0QE3mwycBzlLvAIJhfgyIF0ZSNIUN';
+const CSV_BASE = 'https://docs.google.com/spreadsheets/d/e/' + SHEET_ID + '/pub?';
+const GIDS = {
+    new: '0', lost: '58691224', negative: '1090418662',
+    previous: '127079155', confirmed: '1301288423', referred: '391257024', treated: '1036112251'
+};
+
+const PROXIES = [
+    url => url,
+    url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+    url => 'https://corsproxy.io/?' + encodeURIComponent(url),
+];
+
+Chart.defaults.color = '#8b9dc3';
+Chart.defaults.font.family = 'Tajawal,sans-serif';
+Chart.defaults.font.size = 12;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+const tip = { backgroundColor: '#1a2236', borderColor: 'rgba(255,255,255,.1)', borderWidth: 1, titleColor: '#f0f4f8', bodyColor: '#8b9dc3', rtl: true, textDirection: 'rtl' };
+const moNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+let charts = {};
+let dataMethod = 'none';
+
+/* ===== Apps Script API ===== */
+async function fetchFromAPI() {
+    if (API_URL === 'ضع_رابط_النشر_هنا') throw new Error('API URL not set');
+    const resp = await fetch(API_URL);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+    if (json.status !== 'success') throw new Error(json.message || 'API error');
+    dataMethod = 'api';
+    return {
+        newCases: json.new || [], previous: json.previous || [], lost: json.lost || [],
+        negative: json.negative || [], confirmed: json.confirmed || [],
+        referred: json.referred || [], treated: json.treated || []
+    };
+}
+
+/* ===== CSV Fallback ===== */
+function getSheetURL(gid) { return CSV_BASE + 'gid=' + gid + '&single=true&output=csv'; }
+
+async function fetchWithProxy(url, proxyFn) {
+    const finalUrl = proxyFn(url);
+    const resp = await fetch(finalUrl, { redirect: 'follow' });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const text = await resp.text();
+    if (text.includes('<!DOCTYPE') || text.includes('<html')) throw new Error('Got HTML');
+    return text;
+}
+
+async function fetchCSV(gid) {
+    const url = getSheetURL(gid);
+    for (let i = 0; i < PROXIES.length; i++) {
+        try {
+            const text = await fetchWithProxy(url, PROXIES[i]);
+            return new Promise(resolve => {
+                Papa.parse(text, {
+                    header: true, skipEmptyLines: true,
+                    complete: r => resolve(r.data.filter(row => {
+                        const f = Object.values(row)[0];
+                        return f && f.toString().trim() !== '' && !isNaN(parseFloat(f));
+                    }))
+                });
+            });
+        } catch (e) { continue; }
+    }
+    throw new Error('CSV fetch failed');
+}
+
+async function fetchFromCSV() {
+    if (typeof Papa === 'undefined') await loadScript('https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js');
+    const [newCases, previous, lost, negative, confirmed, referred, treated] = await Promise.all([
+        fetchCSV(GIDS.new), fetchCSV(GIDS.previous), fetchCSV(GIDS.lost), fetchCSV(GIDS.negative),
+        fetchCSV(GIDS.confirmed), fetchCSV(GIDS.referred), fetchCSV(GIDS.treated)
+    ]);
+    dataMethod = 'csv';
+    return { newCases, previous, lost, negative, confirmed, referred, treated };
+}
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const s = document.createElement('script'); s.src = src;
+        s.onload = resolve; s.onerror = reject; document.head.appendChild(s);
+    });
+}
+
+/* ===== Data Processing ===== */
+function countRows(d) { return d.length; }
+function getGender(d) { let m = 0, f = 0; d.forEach(r => { const g = (r['الجنس'] || '').toString().trim(); if (g === 'ذكر') m++; else if (g === 'انثى' || g === 'أنثى') f++; }); return { male: m, female: f }; }
+function getNationality(d) { let s = 0, n = 0; d.forEach(r => { const v = (r['الجنسية'] || '').toString().trim(); if (v === 'السعودية') s++; else if (v) n++; }); return { saudi: s, nonSaudi: n }; }
+function getAgeGroups(d) { const g = [0, 0, 0, 0, 0]; d.forEach(r => { const a = parseFloat(r['العمر']); if (isNaN(a)) return; if (a < 20) g[0]++; else if (a < 40) g[1]++; else if (a < 60) g[2]++; else if (a < 80) g[3]++; else g[4]++; }); return g; }
+function getCities(d) { const c = {}; d.forEach(r => { const v = (r['المدينة'] || '').toString().trim(); if (v) c[v] = (c[v] || 0) + 1; }); return Object.entries(c).sort((a, b) => b[1] - a[1]); }
+function getMonthly(d) { const m = new Array(12).fill(0); d.forEach(r => { const v = r['التاريخ']; if (!v) return; const p = new Date(v); if (!isNaN(p)) { const mo = p.getMonth(); if (mo >= 0 && mo < 12) m[mo]++; } }); return m; }
+function getHospitals(d) { const h = {}; d.forEach(r => { let n = (r['المبلغة من'] || '').toString().trim(); if (!n) return; h[n] = (h[n] || 0) + 1; }); return Object.entries(h).sort((a, b) => b[1] - a[1]); }
+function pct(a, b) { return b ? ((a / b) * 100).toFixed(1) + '%' : '0%'; }
+function pctNum(a, b) { return b ? parseFloat(((a / b) * 100).toFixed(1)) : 0; }
+function animateNum(el, target) { if (!el) return; let c = 0; const inc = Math.max(1, Math.ceil(target / 35)); const t = setInterval(() => { c += inc; if (c >= target) { c = target; clearInterval(t); } el.textContent = c; }, 30); }
+function destroyCharts() { Object.values(charts).forEach(c => { if (c && c.destroy) c.destroy(); }); charts = {}; }
+
+function showMethod() {
+    const info = document.getElementById('methodInfo');
+    if (dataMethod === 'api') {
+        info.innerHTML = '<span class="tag tag-ok">✅ Apps Script API</span> البيانات تُسحب مباشرة عبر API خاص — اتصال مستقر';
+    } else if (dataMethod === 'csv') {
+        info.innerHTML = '<span class="tag tag-fallback">⚠️ وضع احتياطي</span> البيانات تُسحب عبر CSV — يُنصح بتفعيل Apps Script API';
+    }
+    info.style.display = 'flex';
+}
+
+function renderDashboard(data) {
+    const { newCases, previous, lost, negative, confirmed, referred, treated } = data;
+    const nNew = countRows(newCases), nPrev = countRows(previous), nLost = countRows(lost);
+    const nNeg = countRows(negative), nConf = countRows(confirmed), nRef = countRows(referred), nTreat = countRows(treated);
+    const totalConfirmed = nConf + nRef + nTreat;
+    const allData = [...newCases, ...previous, ...lost, ...negative, ...confirmed, ...referred, ...treated];
+    const total = allData.length;
+    destroyCharts();
+
+    document.getElementById('kpiSection').innerHTML = `
+    <div class="kc k1 anim"><div class="ki">📊</div><div class="kl">إجمالي البلاغات</div><div class="kv" id="kvTotal">0</div><div class="ks">جميع الحالات المبلّغة 2026</div></div>
+    <div class="kc k2 anim"><div class="ki">🔬</div><div class="kl">الحالات المؤكدة (PCR+)</div><div class="kv" id="kvConf">0</div><div class="ks"><span class="kp" style="background:var(--bld);color:var(--bl)">${pct(totalConfirmed, total)}</span> من الإجمالي</div></div>
+    <div class="kc k3 anim"><div class="ki">✅</div><div class="kl">الحالات السلبية</div><div class="kv" id="kvNeg">0</div><div class="ks"><span class="kp" style="background:var(--gnd);color:var(--gn)">${pct(nNeg, total)}</span> ليست حالة</div></div>
+    <div class="kc k4 anim"><div class="ki">🏥</div><div class="kl">المحولة للعلاج</div><div class="kv" id="kvRef">0</div><div class="ks"><span class="kp" style="background:var(--amd);color:var(--am)">${pct(nRef, totalConfirmed)}</span> من المؤكدة</div></div>
+    <div class="kc k5 anim"><div class="ki">💊</div><div class="kl">أتموا العلاج</div><div class="kv" id="kvTreat">0</div><div class="ks"><span class="kp" style="background:var(--cyd);color:var(--cy)">${pct(nTreat, totalConfirmed)}</span> من المؤكدة</div></div>
+    <div class="kc k6 anim"><div class="ki">📵</div><div class="kl">فقد الاتصال</div><div class="kv" id="kvLost">0</div><div class="ks"><span class="kp" style="background:var(--rdd);color:var(--rd)">${pct(nLost, total)}</span> يحتاج متابعة</div></div>
+    <div class="kc k7 anim"><div class="ki">📁</div><div class="kl">إصابات سابقة</div><div class="kv" id="kvPrev">0</div><div class="ks">حالات تعافت سابقاً</div></div>
+    <div class="kc k8 anim"><div class="ki">⏳</div><div class="kl">تحت التقصي (جديدة)</div><div class="kv" id="kvNew">0</div><div class="ks">بانتظار نتائج PCR</div></div>`;
+    setTimeout(() => { animateNum(document.getElementById('kvTotal'), total); animateNum(document.getElementById('kvConf'), totalConfirmed); animateNum(document.getElementById('kvNeg'), nNeg); animateNum(document.getElementById('kvRef'), nRef); animateNum(document.getElementById('kvTreat'), nTreat); animateNum(document.getElementById('kvLost'), nLost); animateNum(document.getElementById('kvPrev'), nPrev); animateNum(document.getElementById('kvNew'), nNew); }, 100);
+
+    const confRate = pctNum(totalConfirmed, total), refRate = pctNum(nRef, totalConfirmed), treatRate = pctNum(nTreat, totalConfirmed), lostRate = pctNum(nLost, total);
+    document.getElementById('gaugeSection').innerHTML = `
+    <div class="gc anim"><h3>معدل التأكيد</h3><div class="gw"><canvas id="g1"></canvas><div class="gval" style="color:var(--bl)">${Math.round(confRate)}%</div></div><div class="gd">نسبة المؤكدة من الإجمالي</div></div>
+    <div class="gc anim"><h3>معدل التحويل للعلاج</h3><div class="gw"><canvas id="g2"></canvas><div class="gval" style="color:var(--am)">${Math.round(refRate)}%</div></div><div class="gd">نسبة المحولة من المؤكدة</div></div>
+    <div class="gc anim"><h3>معدل إتمام العلاج</h3><div class="gw"><canvas id="g3"></canvas><div class="gval" style="color:var(--cy)">${Math.round(treatRate)}%</div></div><div class="gd">نسبة من أتموا العلاج</div></div>
+    <div class="gc anim"><h3>معدل فقد المتابعة</h3><div class="gw"><canvas id="g4"></canvas><div class="gval" style="color:var(--rd)">${Math.round(lostRate)}%</div></div><div class="gd">نسبة فقد الاتصال</div></div>`;
+    function mkG(id, v, c) { charts['_g' + id] = new Chart(document.getElementById(id), { type: 'doughnut', data: { datasets: [{ data: [Math.min(v, 100), Math.max(100 - v, 0)], backgroundColor: [c, 'rgba(255,255,255,.04)'], borderWidth: 0, borderRadius: 6 }] }, options: { cutout: '78%', responsive: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, rotation: -90, circumference: 180, animation: { animateRotate: true, duration: 1500 } } }); }
+    mkG('g1', confRate, '#3b82f6'); mkG('g2', refRate, '#f59e0b'); mkG('g3', treatRate, '#22d3ee'); mkG('g4', lostRate, '#ef4444');
+
+    document.getElementById('funnelSection').innerHTML = `
+    <div class="fn-t">🔄 مسار الرعاية — من البلاغ إلى التعافي</div>
+    <div class="fn-s">
+    <div class="fn-i"><div class="fn-b" style="background:linear-gradient(135deg,var(--em),#0fa);height:70px" id="fnTotal">0</div><div class="fn-l">إجمالي البلاغات</div></div>
+    <div class="fn-a">◀</div>
+    <div class="fn-i"><div class="fn-b" style="background:linear-gradient(135deg,var(--bl),var(--pr));height:62px" id="fnConf">0</div><div class="fn-l">مؤكدة PCR+</div><div class="fn-r">${pct(totalConfirmed, total)}</div></div>
+    <div class="fn-a">◀</div>
+    <div class="fn-i"><div class="fn-b" style="background:linear-gradient(135deg,var(--am),#fb923c);height:54px" id="fnRef">0</div><div class="fn-l">محولة للعلاج</div><div class="fn-r">${pct(nRef, totalConfirmed)}</div></div>
+    <div class="fn-a">◀</div>
+    <div class="fn-i"><div class="fn-b" style="background:linear-gradient(135deg,var(--cy),var(--em));height:46px" id="fnTreat">0</div><div class="fn-l">أتموا العلاج</div><div class="fn-r">${pct(nTreat, totalConfirmed)}</div></div>
+    </div>`;
+    setTimeout(() => { animateNum(document.getElementById('fnTotal'), total); animateNum(document.getElementById('fnConf'), totalConfirmed); animateNum(document.getElementById('fnRef'), nRef); animateNum(document.getElementById('fnTreat'), nTreat); }, 200);
+
+    const gender = getGender(allData), nat = getNationality(allData), ages = getAgeGroups(allData);
+    const citiesArr = getCities(allData), topCities = citiesArr.slice(0, 6);
+    const otherCities = citiesArr.slice(6).reduce((s, c) => s + c[1], 0);
+    const monthNeg = getMonthly(negative), monthNew = getMonthly(newCases), monthRef = getMonthly(referred);
+    const hospAll = getHospitals(allData), topHosp = hospAll.slice(0, 6);
+    const otherHosp = hospAll.slice(6).reduce((s, h) => s + h[1], 0);
+
+    document.getElementById('chartsSection').innerHTML = `
+    <div class="cc fw anim"><div class="ch"><h3><span class="dot" style="background:var(--em)"></span> التوزيع الشهري — 2026</h3></div><div class="ccn" style="height:300px"><canvas id="c1"></canvas></div></div>
+    <div class="cc anim"><div class="ch"><h3><span class="dot" style="background:var(--bl)"></span> التوزيع حسب الجنس</h3></div><div class="ccn" style="height:280px"><canvas id="c2"></canvas></div></div>
+    <div class="cc anim"><div class="ch"><h3><span class="dot" style="background:var(--pr)"></span> التوزيع حسب الجنسية</h3></div><div class="ccn" style="height:280px"><canvas id="c3"></canvas></div></div>
+    <div class="cc anim"><div class="ch"><h3><span class="dot" style="background:var(--am)"></span> الفئة العمرية</h3></div><div class="ccn" style="height:280px"><canvas id="c4"></canvas></div></div>
+    <div class="cc anim"><div class="ch"><h3><span class="dot" style="background:var(--cy)"></span> التوزيع حسب المدينة</h3></div><div class="ccn" style="height:280px"><canvas id="c5"></canvas></div></div>
+    <div class="cc anim"><div class="ch"><h3><span class="dot" style="background:var(--pk)"></span> توزيع الحالات</h3></div><div class="ccn" style="height:280px"><canvas id="c6"></canvas></div></div>
+    <div class="cc anim"><div class="ch"><h3><span class="dot" style="background:var(--lm)"></span> أعلى الجهات المبلّغة</h3></div><div class="ccn" style="height:280px"><canvas id="c7"></canvas></div></div>`;
+
+    charts.c1 = new Chart(document.getElementById('c1'), { type: 'bar', data: { labels: moNames, datasets: [{ label: 'سلبية', data: monthNeg, backgroundColor: 'rgba(16,185,129,.7)', borderRadius: 4, order: 2 }, { label: 'جديدة', data: monthNew, backgroundColor: 'rgba(244,114,182,.7)', borderRadius: 4, order: 3 }, { label: 'محولة للعلاج', data: monthRef, type: 'line', borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,.1)', tension: .4, pointRadius: 4, pointBackgroundColor: '#f59e0b', fill: true, order: 1 }] }, options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, scales: { x: { grid: { display: false }, stacked: true }, y: { grid: { color: 'rgba(255,255,255,.03)' }, stacked: true, beginAtZero: true } }, plugins: { legend: { position: 'top' }, tooltip: tip } } });
+    charts.c2 = new Chart(document.getElementById('c2'), { type: 'doughnut', data: { labels: ['ذكر', 'أنثى'], datasets: [{ data: [gender.male, gender.female], backgroundColor: ['rgba(59,130,246,.8)', 'rgba(244,114,182,.8)'], borderWidth: 0, borderRadius: 4, spacing: 3 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' }, tooltip: tip } } });
+    charts.c3 = new Chart(document.getElementById('c3'), { type: 'doughnut', data: { labels: ['سعودي', 'غير سعودي'], datasets: [{ data: [nat.saudi, nat.nonSaudi], backgroundColor: ['rgba(0,229,160,.8)', 'rgba(167,139,250,.8)'], borderWidth: 0, borderRadius: 4, spacing: 3 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom' }, tooltip: tip } } });
+    charts.c4 = new Chart(document.getElementById('c4'), { type: 'bar', data: { labels: ['أقل من 20', '20-39', '40-59', '60-79', '80+'], datasets: [{ data: ages, backgroundColor: ['rgba(163,230,53,.7)', 'rgba(34,211,238,.7)', 'rgba(59,130,246,.7)', 'rgba(245,158,11,.7)', 'rgba(239,68,68,.7)'], borderRadius: 6, borderSkipped: false }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { grid: { color: 'rgba(255,255,255,.03)' }, beginAtZero: true }, y: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: tip } } });
+    const cityLabels = [...topCities.map(c => c[0])]; if (otherCities > 0) cityLabels.push('أخرى');
+    const cityData = [...topCities.map(c => c[1])]; if (otherCities > 0) cityData.push(otherCities);
+    charts.c5 = new Chart(document.getElementById('c5'), { type: 'bar', data: { labels: cityLabels, datasets: [{ data: cityData, backgroundColor: 'rgba(0,229,160,.65)', borderRadius: 6, borderSkipped: false }] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,.03)' }, beginAtZero: true } }, plugins: { legend: { display: false }, tooltip: tip } } });
+    charts.c6 = new Chart(document.getElementById('c6'), { type: 'polarArea', data: { labels: ['سلبية', 'مؤكدة', 'محولة للعلاج', 'أتموا العلاج', 'فقد اتصال', 'تحت التقصي', 'إصابات سابقة'], datasets: [{ data: [nNeg, totalConfirmed, nRef, nTreat, nLost, nNew, nPrev], backgroundColor: ['rgba(16,185,129,.7)', 'rgba(59,130,246,.7)', 'rgba(245,158,11,.7)', 'rgba(34,211,238,.7)', 'rgba(239,68,68,.7)', 'rgba(244,114,182,.7)', 'rgba(167,139,250,.7)'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { grid: { color: 'rgba(255,255,255,.03)' }, ticks: { display: false } } }, plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } }, tooltip: tip } } });
+    const hospLabels = [...topHosp.map(h => h[0])]; if (otherHosp > 0) hospLabels.push('أخرى');
+    const hospData = [...topHosp.map(h => h[1])]; if (otherHosp > 0) hospData.push(otherHosp);
+    const hospColors = ['rgba(59,130,246,.75)', 'rgba(0,229,160,.75)', 'rgba(245,158,11,.75)', 'rgba(167,139,250,.75)', 'rgba(34,211,238,.75)', 'rgba(244,114,182,.75)', 'rgba(100,116,139,.5)'];
+    charts.c7 = new Chart(document.getElementById('c7'), { type: 'bar', data: { labels: hospLabels, datasets: [{ data: hospData, backgroundColor: hospColors.slice(0, hospLabels.length), borderRadius: 6, borderSkipped: false }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { grid: { color: 'rgba(255,255,255,.03)' }, beginAtZero: true }, y: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: tip } } });
+
+    // Table
+    const hospBySheet = {};
+    function countForHosp(sheet, key) { sheet.forEach(r => { let n = (r['المبلغة من'] || '').toString().trim(); if (!n) return; if (!hospBySheet[n]) hospBySheet[n] = { total: 0, confirmed: 0, negative: 0, referred: 0, treated: 0, lost: 0 }; hospBySheet[n][key]++; hospBySheet[n].total++; }); }
+    countForHosp(newCases, 'newCase'); countForHosp(previous, 'previous'); countForHosp(lost, 'lost'); countForHosp(negative, 'negative'); countForHosp(confirmed, 'confirmed'); countForHosp(referred, 'referred'); countForHosp(treated, 'treated');
+    Object.values(hospBySheet).forEach(h => { h.confirmed = (h.confirmed || 0) + (h.referred || 0) + (h.treated || 0); });
+    const sortedHosp = Object.entries(hospBySheet).sort((a, b) => b[1].total - a[1].total).slice(0, 10);
+    let tHTML = '<h3>📋 ملخص البلاغات حسب الجهة المبلّغة</h3><table><thead><tr><th>#</th><th>الجهة</th><th>إجمالي</th><th>مؤكدة</th><th>سلبية</th><th>محولة</th><th>أتموا العلاج</th><th>فقد اتصال</th></tr></thead><tbody>';
+    sortedHosp.forEach((h, i) => { tHTML += `<tr><td>${i + 1}</td><td>${h[0]}</td><td style="font-weight:700;color:var(--em)">${h[1].total}</td><td>${h[1].confirmed}</td><td>${h[1].negative || 0}</td><td>${h[1].referred || 0}</td><td>${h[1].treated || 0}</td><td style="color:var(--rd)">${h[1].lost || 0}</td></tr>`; });
+    tHTML += '</tbody></table>';
+    document.getElementById('tableSection').innerHTML = tHTML;
+}
+
+/* ===== Main Loader ===== */
+async function loadAllData() {
+    document.getElementById('loading').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+
+    // Try API first
+    try {
+        const data = await fetchFromAPI();
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleString('ar-SA', { dateStyle: 'short', timeStyle: 'short' });
+        showMethod();
+        renderDashboard(data);
+        return;
+    } catch (e) { console.log('API unavailable:', e.message); }
+
+    // Fallback to CSV
+    try {
+        const data = await fetchFromCSV();
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleString('ar-SA', { dateStyle: 'short', timeStyle: 'short' });
+        showMethod();
+        renderDashboard(data);
+        return;
+    } catch (e) { console.log('CSV failed:', e.message); }
+
+    // Both failed
+    document.getElementById('loading').innerHTML = `
+    <p style="color:var(--rd);font-size:16px">❌ تعذر تحميل البيانات</p>
+    <p style="color:var(--t2);font-size:13px;margin-top:8px;max-width:600px;text-align:center;line-height:1.8">
+    <strong>الحل:</strong> فعّل سكربت Apps Script API<br>
+    1. افتح Google Sheets ← الإضافات ← Apps Script<br>
+    2. الصق كود السكربت المرفق<br>
+    3. انشره كتطبيق ويب<br>
+    4. ضع رابط النشر في المتغير API_URL
+    </p>
+    <br><span class="bdg bdg-ref" onclick="loadAllData()">🔄 إعادة المحاولة</span>`;
+}
+
+loadAllData();
+setInterval(loadAllData, 5 * 60 * 1000);
+</script>
+</body>
+</html>
