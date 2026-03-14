@@ -249,7 +249,7 @@ function renderDashboard(data) {
 
     document.getElementById('kpiSection').innerHTML = `
     <div class="kc k1 anim"><div class="ki">📊</div><div class="kl">إجمالي البلاغات</div><div class="kv" id="kvTotal">0</div><div class="ks">جميع الحالات المبلّغة 2026</div></div>
-    <div class="kc k2 anim"><div class="ki">🔬</div><div class="kl">الحالات المؤكدة (PCR+)</div><div class="kv" id="kvConf">0</div><div class="ks"><span class="kp" style="background:var(--bld);color:var(--bl)">${pct(totalConfirmed, total)}</span> من الإجمالي</div></div>
+    <div class="kc k2 anim"><div class="ki">🔬</div><div class="kl">الحالات المؤكدة (PCR+)</div><div class="kv" id="kvConf">0</div><div class="ks"><span class="kp" style="background:var(--bld);color:var(--bl)">${pct(totalConfirmed, totalConfirmed + nNeg + nPrev)}</span> من المفحوصين</div></div>
     <div class="kc k3 anim"><div class="ki">✅</div><div class="kl">الحالات السلبية</div><div class="kv" id="kvNeg">0</div><div class="ks"><span class="kp" style="background:var(--gnd);color:var(--gn)">${pct(nNeg, total)}</span> ليست حالة</div></div>
     <div class="kc k4 anim"><div class="ki">🏥</div><div class="kl">المحولة للعلاج</div><div class="kv" id="kvRef">0</div><div class="ks"><span class="kp" style="background:var(--amd);color:var(--am)">${pct(nRef, totalConfirmed)}</span> من المؤكدة</div></div>
     <div class="kc k5 anim"><div class="ki">💊</div><div class="kl">أتموا العلاج</div><div class="kv" id="kvTreat">0</div><div class="ks"><span class="kp" style="background:var(--cyd);color:var(--cy)">${pct(nTreat, totalConfirmed)}</span> من المؤكدة</div></div>
@@ -258,9 +258,10 @@ function renderDashboard(data) {
     <div class="kc k8 anim"><div class="ki">⏳</div><div class="kl">تحت التقصي (جديدة)</div><div class="kv" id="kvNew">0</div><div class="ks">بانتظار نتائج PCR</div></div>`;
     setTimeout(() => { animateNum(document.getElementById('kvTotal'), total); animateNum(document.getElementById('kvConf'), totalConfirmed); animateNum(document.getElementById('kvNeg'), nNeg); animateNum(document.getElementById('kvRef'), nRef); animateNum(document.getElementById('kvTreat'), nTreat); animateNum(document.getElementById('kvLost'), nLost); animateNum(document.getElementById('kvPrev'), nPrev); animateNum(document.getElementById('kvNew'), nNew); }, 100);
 
-    const confRate = pctNum(totalConfirmed, total), refRate = pctNum(nRef, totalConfirmed), treatRate = pctNum(nTreat, totalConfirmed), lostRate = pctNum(nLost, total);
+    const confDenominator = totalConfirmed + nNeg + nPrev;
+    const confRate = pctNum(totalConfirmed, confDenominator), refRate = pctNum(nRef, totalConfirmed), treatRate = pctNum(nTreat, totalConfirmed), lostRate = pctNum(nLost, total);
     document.getElementById('gaugeSection').innerHTML = `
-    <div class="gc anim"><h3>معدل التأكيد</h3><div class="gw"><canvas id="g1"></canvas><div class="gval" style="color:var(--bl)">${Math.round(confRate)}%</div></div><div class="gd">نسبة المؤكدة من الإجمالي</div></div>
+    <div class="gc anim"><h3>معدل التأكيد</h3><div class="gw"><canvas id="g1"></canvas><div class="gval" style="color:var(--bl)">${Math.round(confRate)}%</div></div><div class="gd">نسبة المؤكدة من المفحوصين</div></div>
     <div class="gc anim"><h3>معدل التحويل للعلاج</h3><div class="gw"><canvas id="g2"></canvas><div class="gval" style="color:var(--am)">${Math.round(refRate)}%</div></div><div class="gd">نسبة المحولة من المؤكدة</div></div>
     <div class="gc anim"><h3>معدل إتمام العلاج</h3><div class="gw"><canvas id="g3"></canvas><div class="gval" style="color:var(--cy)">${Math.round(treatRate)}%</div></div><div class="gd">نسبة من أتموا العلاج</div></div>
     <div class="gc anim"><h3>معدل فقد المتابعة</h3><div class="gw"><canvas id="g4"></canvas><div class="gval" style="color:var(--rd)">${Math.round(lostRate)}%</div></div><div class="gd">نسبة فقد الاتصال</div></div>`;
